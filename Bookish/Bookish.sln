@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookish.ConsoleApp", "Booki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookish.DataAccess", "Bookish.DataAccess\Bookish.DataAccess.csproj", "{BBE43EA3-257F-4A95-A31F-82B37F65EA1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookish.Web", "Bookish.Web\Bookish.Web.csproj", "{64165613-2899-4D70-A903-99117244CE59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BBE43EA3-257F-4A95-A31F-82B37F65EA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBE43EA3-257F-4A95-A31F-82B37F65EA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBE43EA3-257F-4A95-A31F-82B37F65EA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64165613-2899-4D70-A903-99117244CE59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64165613-2899-4D70-A903-99117244CE59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64165613-2899-4D70-A903-99117244CE59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64165613-2899-4D70-A903-99117244CE59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,6 +18,7 @@ namespace Bookish
                 Console.WriteLine(book.ID);
                 Console.WriteLine(book.ISBN);
             }
+            //db.Execute("insert into Books(ID,ISBN) values (11,1234)");
             Console.ReadLine();
         }
     }
