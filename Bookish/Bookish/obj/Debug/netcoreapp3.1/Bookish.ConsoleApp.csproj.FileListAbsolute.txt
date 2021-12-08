@@ -35,6 +35,7 @@ C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\Bookish.ConsoleApp.AssemblyInfoInputs.cache
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\Bookish.ConsoleApp.AssemblyInfo.cs
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\Bookish.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\Bookish.ConsoleApp.csproj.CopyComplete
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\Bookish.ConsoleApp.dll
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\Bookish.ConsoleApp.pdb
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish\obj\Debug\netcoreapp3.1\Bookish.ConsoleApp.genruntimeconfig.cache

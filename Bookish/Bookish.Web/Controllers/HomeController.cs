@@ -6,6 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Protocols;
+using System.Configuration;
+using Bookish.DataAccess;
+using Dapper;
 
 namespace Bookish.Web.Controllers
 {
@@ -17,7 +23,17 @@ namespace Bookish.Web.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult BookPage()
+        {
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            List<BookInfo> books = (List<BookInfo>)db.Query<BookInfo>("select * from BookInfo");
+            return View(books);
+        }
+        public IActionResult UserPage()
+        {
+            //User.Identity.
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

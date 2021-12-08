@@ -1,0 +1,14 @@
+﻿@model List<Bookish.DataAccess.BookInfo>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Hello I am Working</p>
+    @foreach (var book in Model){
+        <p>@book.ISBN</p>
+        <p>@book.BookName</p>
+        <p>@book.Author</p>
+        <p>@book.BarCode</p>
+        //queery to count number of current available copies
+    }
+
+</div>

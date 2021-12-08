@@ -242,6 +242,9 @@
         }
       },
       "Bookish.DataAccess/1.0.0": {
+        "dependencies": {
+          "Dapper": "2.0.123"
+        },
         "runtime": {
           "Bookish.DataAccess.dll": {}
         }
