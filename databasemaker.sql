@@ -27,7 +27,7 @@ CONSTRAINT PK_Borrowed PRIMARY KEY (userID,bookID)
 );
 
 BULK INSERT Accounts
-FROM 'C:\Users\Francis.Jordan\OneDrive\Desktop\Learning\Bootcamp\Bookish\AccountsData.csv'
+FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\AccountsData.csv'
 WITH
 (
 	FIRSTROW = 2, -- as 1st one is header
@@ -37,7 +37,7 @@ WITH
 )
 
 BULK INSERT BookInfo
-FROM 'C:\Users\Francis.Jordan\OneDrive\Desktop\Learning\Bootcamp\Bookish\BookInfoData.csv'
+FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\BookInfoData.csv'
 WITH
 (
 	FIRSTROW = 2, -- as 1st one is header
@@ -47,7 +47,7 @@ WITH
 )
 
 BULK INSERT Books
-FROM 'C:\Users\Francis.Jordan\OneDrive\Desktop\Learning\Bootcamp\Bookish\BooksData.csv'
+FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\BooksData.csv'
 WITH
 (
 	FIRSTROW = 2, -- as 1st one is header
@@ -57,7 +57,7 @@ WITH
 )
 
 BULK INSERT Borrowed
-FROM 'C:\Users\Francis.Jordan\OneDrive\Desktop\Learning\Bootcamp\Bookish\BorrowedData.csv'
+FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\BorrowedData.csv'
 WITH
 (
 	FIRSTROW = 2, -- as 1st one is header
