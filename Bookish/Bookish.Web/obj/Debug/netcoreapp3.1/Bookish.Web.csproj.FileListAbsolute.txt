@@ -220,3 +220,4 @@ C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.Web\obj\Debug\netc
 C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.Web\obj\Debug\netcoreapp3.1\Bookish.Web.dll
 C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.Web\obj\Debug\netcoreapp3.1\Bookish.Web.pdb
 C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.Web\obj\Debug\netcoreapp3.1\Bookish.Web.genruntimeconfig.cache
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\BookInfo.cshtml.g.cs

@@ -29,6 +29,23 @@ namespace Bookish.Web.Controllers
             List<BookInfo> books = (List<BookInfo>)db.Query<BookInfo>("select * from BookInfo");
             return View(books);
         }
+        public IActionResult BookInfo(int ISBN)
+        {
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            
+            string sql = "select * from Books WHERE ISBN = " + ISBN;
+            List<Book> books = (List<Book>)db.Query<Book>(sql);
+
+            string sql2 = "select BookName from BookINFO WHERE ISBN = " + ISBN;
+            string name = db.Query<string>(sql2).Single();
+
+            NoCopiesInfo c = new NoCopiesInfo();
+            c.books = books;
+            c.Name = name;
+            c.copies = books.Count;
+
+            return View(c);
+        }
         public IActionResult UserPage()
         {
             //User.Identity.
