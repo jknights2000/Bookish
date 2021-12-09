@@ -39,11 +39,17 @@ namespace Bookish.Web.Controllers
             string sql2 = "select BookName from BookINFO WHERE ISBN = " + ISBN;
             string name = db.Query<string>(sql2).Single();
 
+            string sql3 = "select count(*) from Books WHERE ISBN = " + ISBN;
+            int numberofcopies = db.Query<int>(sql3).Single();
+
+            string sql4 = "SELECT count(books.id) from books, borrowed where books.id = borrowed.bookid and books.ISBN = " + ISBN;
+            int numberoftaken = db.Query<int>(sql4).Single();
+            // SELECT books.id from books, borrowed where book.id = borrowed.bookid
             NoCopiesInfo c = new NoCopiesInfo();
             c.books = books;
             c.Name = name;
-            c.copies = books.Count;
-
+            c.copies = numberofcopies;
+            c.avaiable = numberofcopies - numberoftaken;
             return View(c);
         }
         public IActionResult UserPage()
