@@ -7,3 +7,13 @@ C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish.DataAccess\obj\Debug\net
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.dll
 C:\Users\Jim.Davey\Work\Bookish\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.pdb
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\bin\Debug\netcoreapp3.1\Bookish.DataAccess.deps.json
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\bin\Debug\netcoreapp3.1\Bookish.DataAccess.dll
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\bin\Debug\netcoreapp3.1\Bookish.DataAccess.pdb
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.AssemblyInfo.cs
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.dll
+C:\Users\Joshua.knights\Work\Training\Bookish\Bookish\Bookish.DataAccess\obj\Debug\netcoreapp3.1\Bookish.DataAccess.pdb

@@ -5956,28 +5956,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jim.Davey\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Joshua.knights\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jim.Davey\\Work\\Bookish\\Bookish\\Bookish\\Bookish.Web\\Bookish.Web.csproj",
+      "projectUniqueName": "C:\\Users\\Joshua.knights\\Work\\Training\\Bookish\\Bookish\\Bookish.Web\\Bookish.Web.csproj",
       "projectName": "Bookish.Web",
-      "projectPath": "C:\\Users\\Jim.Davey\\Work\\Bookish\\Bookish\\Bookish\\Bookish.Web\\Bookish.Web.csproj",
-      "packagesPath": "C:\\Users\\Jim.Davey\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jim.Davey\\Work\\Bookish\\Bookish\\Bookish\\Bookish.Web\\obj\\",
+      "projectPath": "C:\\Users\\Joshua.knights\\Work\\Training\\Bookish\\Bookish\\Bookish.Web\\Bookish.Web.csproj",
+      "packagesPath": "C:\\Users\\Joshua.knights\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Joshua.knights\\Work\\Training\\Bookish\\Bookish\\Bookish.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Jim.Davey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Joshua.knights\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5990,8 +5987,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Jim.Davey\\Work\\Bookish\\Bookish\\Bookish\\Bookish.DataAccess\\Bookish.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\Jim.Davey\\Work\\Bookish\\Bookish\\Bookish\\Bookish.DataAccess\\Bookish.DataAccess.csproj"
+            "C:\\Users\\Joshua.knights\\Work\\Training\\Bookish\\Bookish\\Bookish.DataAccess\\Bookish.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Joshua.knights\\Work\\Training\\Bookish\\Bookish\\Bookish.DataAccess\\Bookish.DataAccess.csproj"
             }
           }
         }
@@ -6049,7 +6046,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
