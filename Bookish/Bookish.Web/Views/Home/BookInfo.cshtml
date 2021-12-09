@@ -20,14 +20,16 @@
     <h3>Current Borrowed copies</h3>
     <table>
         <tr>
-            <th>ISBN</th>
-            <th>ID</th>
+            <th>User Name</th>
+            <th>Book Copy ID</th>
+            <th>Date due Back</th>
         </tr>
-        @foreach (var book in Model.books)
+        @foreach (var user in Model.UserBorrowed)
         {
             <tr>
-                <td>@book.ISBN</td>
-                <td>@book.ID</td>
+                <td>@user.AccountName</td>
+                <td>@user.ID</td>
+                <td>@user.Duedate.ToShortDateString()</td>
             </tr>
                 //queery to count number of current available copies
          }
