@@ -1,0 +1,37 @@
+﻿@model NoCopiesInfo
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<div class="text-center">
+    <h1 class="display-4">@Model.Name</h1>
+    <h2>Number of Copies: @Model.copies</h2>
+    <h2>Number of Avaiable:@Model.avaiable</h2>
+    <h3>Current Borrowed copies</h3>
+    <table>
+        <tr>
+            <th>User Name</th>
+            <th>Book Copy ID</th>
+            <th>Date due Back</th>
+        </tr>
+        @foreach (var user in Model.UserBorrowed)
+        {
+            <tr>
+                <td>@user.AccountName</td>
+                <td>@user.ID</td>
+                <td>@user.Duedate.ToShortDateString()</td>
+            </tr>
+                //queery to count number of current available copies
+         }
+</table>
+</div>

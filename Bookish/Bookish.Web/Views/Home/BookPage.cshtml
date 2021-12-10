@@ -14,15 +14,14 @@
     }
 </style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>Hello I am Working</p>
+    <h1 class="display-4">Book List</h1>
     <table>
         <tr>
             <th>ISBN</th>
             <th>Book Name</th>
             <th>Author</th>
             <th>BarCode</th>
+            <th>BookInfo</th>
         </tr>
         @foreach (var book in Model)
         {
@@ -31,8 +30,10 @@
                 <td>@book.BookName</td>
                 <td>@book.Author</td>
                 <td>@book.BarCode</td>
-                <td><button>here</button></td>
-</tr>
+                <td><form action="https://localhost:44394/home/bookinfo">
+                    <input name ="ISBN" type="submit" alt="Book info" value=@book.ISBN>
+                    </form></td>
+            </tr>
                 //queery to count number of current available copies
          }
     </table>
