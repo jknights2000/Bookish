@@ -32,8 +32,6 @@ namespace Bookish.Web.Controllers
         public IActionResult BookInfo(int ISBN)
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
-
-            
             BookRepository bookRepo = new BookRepository(db);
 
             NoCopiesInfo noCopiesInfo = new NoCopiesInfo();
