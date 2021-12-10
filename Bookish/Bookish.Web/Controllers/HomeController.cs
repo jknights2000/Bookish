@@ -42,6 +42,33 @@ namespace Bookish.Web.Controllers
             noCopiesInfo.borrowed = bookRepo.GetNumberOfBorrowedCopies(ISBN);
             return View(noCopiesInfo);
         }
+        [HttpGet]
+        public IActionResult AddBookForm()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddBookForm(AddBookModel addBook)
+        {
+            string BookName = addBook.BookName;
+            string Author = addBook.Author;
+            int ISBN = addBook.ISBN;
+            int BarCode = addBook.BarCode;
+            int NumberOfCopies = addBook.NumberOfCopies;
+
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            db.Execute($"INSERT INTO BookInfo (ISBN, BookName, Author, BarCode) VALUES ('{ISBN}', '{BookName}', '{Author}', '{BarCode}')");
+            int MaxId = db.Query<int>("SELECT MAX(ID) FROM Books").Single();
+
+            for (int i = 1; i <= NumberOfCopies; i++)
+            {
+                string MaxIdQuery = $"INSERT INTO Books VALUES ({MaxId + i} , {ISBN})";
+                db.Execute(MaxIdQuery);
+            }
+        /*    Response.Redirect("~/")*/
+            return View();
+        }
+
         public IActionResult UserPage()
         {
             //User.Identity.
