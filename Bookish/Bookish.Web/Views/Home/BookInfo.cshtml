@@ -19,11 +19,14 @@
     <h2>Number of Avaiable:@Model.avaiable</h2>
     <h3>Current Borrowed copies:@Model.borrowed</h3>
     <table>
+        @if (Model.UserBorrowed.Count != 0)
+        {
         <tr>
             <th>User Name</th>
             <th>Book Copy ID</th>
             <th>Date due Back</th>
         </tr>
+        }
         @foreach (var user in Model.UserBorrowed)
         {
             <tr>
