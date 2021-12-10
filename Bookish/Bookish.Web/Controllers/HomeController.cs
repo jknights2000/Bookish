@@ -26,7 +26,7 @@ namespace Bookish.Web.Controllers
         public IActionResult BookPage()
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
-            List<BookInfo> books = (List<BookInfo>)db.Query<BookInfo>("select * from BookInfo");
+            List<BookInfo> books = (List<BookInfo>)db.Query<BookInfo>("select * from BookInfo ORDER BY bookname");
             return View(books);
         }
         public IActionResult BookInfo(int ISBN)
