@@ -13,5 +13,6 @@ namespace Bookish.Web.Models
         public string Name;
         public int copies;
         public int avaiable;
+        public int borrowed;
     }
 }

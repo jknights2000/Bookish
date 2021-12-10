@@ -39,6 +39,7 @@ namespace Bookish.Web.Controllers
             noCopiesInfo.Name = bookRepo.GetBookName(ISBN);
             noCopiesInfo.copies = bookRepo.GetTotalNumberOfCopies(ISBN);
             noCopiesInfo.avaiable = bookRepo.GetNumberOfAvailableCopies(ISBN);
+            noCopiesInfo.borrowed = bookRepo.GetNumberOfBorrowedCopies(ISBN);
             return View(noCopiesInfo);
         }
         public IActionResult UserPage()
