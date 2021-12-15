@@ -10,9 +10,10 @@ namespace Bookish.Web.Models
     public class NoCopiesInfo
     {
         public List<UserBorrowed> UserBorrowed;
+        public List<Book> AvailableBooks;
         public string Name;
-        public int copies;
-        public int avaiable;
-        public int borrowed;
+        public int Copies;
+        public int Avaiable;
+        public int Borrowed;
     }
 }
