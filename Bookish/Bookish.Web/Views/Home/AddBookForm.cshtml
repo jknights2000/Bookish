@@ -1,0 +1,44 @@
+﻿@model Bookish.Web.Models.AddBookModel
+@{
+    ViewBag.Title = "Add Book";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/form.css" />
+</head>
+<body>
+    @using (Html.BeginForm("AddBookForm", "Home", FormMethod.Post))
+    {
+        <div class="text-center">
+            <h1 class="display-4">Welcome</h1>
+            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+            <h3>Add A New Book</h3>
+
+            <div class="bookname">
+                <label for="Title">Title</label>
+                @Html.TextBoxFor(m => m.BookName)
+            </div>
+            <div class="author">
+                <label for="Author">Author</label>
+                @Html.TextBoxFor(m => m.Author)
+            </div>
+            <div class="numbers">
+                <label for="NumberOfCopies">Number of Copies</label>
+                @Html.TextBoxFor(m => m.NumberOfCopies)
+                <label for="ISBN">ISBN</label>
+                @Html.TextBoxFor(m => m.ISBN)
+                <label for="BarCode">Barcode</label>
+                @Html.TextBoxFor(m => m.BarCode)
+            </div>
+            <div class="submission">
+                <input type="submit" value="Submit" />
+            </div>
+
+
+        </div>
+    }
+</body>
+</html>
+
+
