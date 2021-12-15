@@ -82,6 +82,16 @@ namespace Bookish.Web.Controllers
             bookRepo.InsertNewBookIntoBorrowed(userId, bookID, dueDateTime);
             return RedirectToAction("BookInfo",new { ISBN });
         }
+        [HttpPost]
+        public IActionResult ReturnedBook(int bookID)
+        {
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            BookRepository bookRepo = new BookRepository(db);
+
+            bookRepo.RemoveBookFromBorrowedUsingBookId(bookID);
+
+            return RedirectToAction("Index");
+        }
         public NoCopiesInfo getNoCopiesInfo(int ISBN)
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");

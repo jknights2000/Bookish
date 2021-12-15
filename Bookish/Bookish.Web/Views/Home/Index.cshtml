@@ -18,14 +18,24 @@
                 <th>Book ID</th>
                 <th>Book name</th>
                 <th>Date due Back</th>
+                <th>Return a Book</th>
             </tr>
             @foreach (var userbook in Model)
             {
-                <tr>
-                    <td>@userbook.ID</td>
-                    <td>@userbook.BookName</td>
-                    <td>@userbook.Duedate.ToShortDateString()</td>
-                </tr>
+        <tr>
+            <td>@userbook.ID</td>
+            <td>@userbook.BookName</td>
+            <td>@userbook.Duedate.ToShortDateString()</td>
+            @using (Html.BeginForm("ReturnedBook", "Home", FormMethod.Post))
+            {
+                <td>
+                    <input type="hidden" name="bookID" value="@userbook.ID" />
+                    <div class="submission">
+                        <input type="submit" value="Return" />
+                    </div>
+                </td>
+            }
+        </tr>
             }
         </table>
     }
