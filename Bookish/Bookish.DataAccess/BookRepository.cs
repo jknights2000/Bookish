@@ -48,5 +48,8 @@ namespace Bookish.DataAccess
         public void InsertNewBookIntoBooks(int Id, int ISBN) => ExecuteInsertionQuery($"INSERT INTO Books VALUES ({Id} , {ISBN})");
 
         public void InsertNewBookIntoBorrowed( string UserId, int BookId, DateTime DueDate) => ExecuteInsertionQuery($"insert into borrowed values ('{UserId}',{BookId},'{DueDate.ToString("yyyy-MM-dd")}')");
+
+        public void RemoveBookFromBorrowedUsingBookId(int BookId) => ExecuteInsertionQuery($"delete from Borrowed where bookID = {BookId}");
+    
     }
 }
