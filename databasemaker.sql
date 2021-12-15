@@ -1,13 +1,6 @@
 DROP TABLE if EXISTS Borrowed
-DROP TABLE if EXISTS Accounts
 DROP TABLE if EXISTS Books
 DROP TABLE if EXISTS BookInfo
-
-CREATE TABLE Accounts(
-ID int NOT NULL PRIMARY KEY,
-AccountName varchar(255),
-AccountPassword varchar(255),
-)
 
 CREATE TABLE BookInfo(
 ISBN int NOT NULL PRIMARY KEY,
@@ -20,24 +13,14 @@ ID int NOT NULL PRIMARY KEY,
 ISBN int NOT NULL FOREIGN KEY REFERENCES BookInfo(ISBN)
 )
 CREATE TABLE Borrowed(
-UserID int NOT NULL FOREIGN KEY REFERENCES Accounts(ID),
-BookID int NOT NULL FOREIGN KEY REFERENCES Books(ID),
-Duedate datetime,
+userID nvarchar(450) NOT NULL FOREIGN KEY REFERENCES AspNetUsers(ID),
+bookID int NOT NULL FOREIGN KEY REFERENCES Books(ID),
+duedate datetime,
 CONSTRAINT PK_Borrowed PRIMARY KEY (userID,bookID)
 );
 
-BULK INSERT Accounts
-FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\AccountsData.csv'
-WITH
-(
-	FIRSTROW = 2, -- as 1st one is header
-    FIELDTERMINATOR = ',',  --CSV field delimiter
-    ROWTERMINATOR = '\n',   --Use to shift the control to next row
-    TABLOCK
-)
-
 BULK INSERT BookInfo
-FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\BookInfoData.csv'
+FROM 'C:\Users\Francis.Jordan\OneDrive\Desktop\Learning\Bootcamp\Bookish\BookInfoData.csv'
 WITH
 (
 	FIRSTROW = 2, -- as 1st one is header
@@ -47,7 +30,7 @@ WITH
 )
 
 BULK INSERT Books
-FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\BooksData.csv'
+FROM 'C:\Users\Francis.Jordan\OneDrive\Desktop\Learning\Bootcamp\Bookish\BooksData.csv'
 WITH
 (
 	FIRSTROW = 2, -- as 1st one is header
@@ -57,7 +40,7 @@ WITH
 )
 
 BULK INSERT Borrowed
-FROM 'C:\Users\Jim.Davey\Work\Bookish\Bookish\BorrowedData.csv'
+FROM 'C:\Users\Francis.Jordan\OneDrive\Desktop\Learning\Bootcamp\Bookish\BorrowedData.csv'
 WITH
 (
 	FIRSTROW = 2, -- as 1st one is header
@@ -65,7 +48,18 @@ WITH
     ROWTERMINATOR = '\n',   --Use to shift the control to next row
     TABLOCK
 )
-select * from Accounts;
+select * from AspNetUsers;
 select * from BookInfo;
 select * from Books;
 select * from Borrowed;
+
+UPDATE AspNetUsers set EmailConfirmed = 1 
+select ID,ISBN from (
+select * from books
+left join  Borrowed
+on books.id = Borrowed.bookID
+where Borrowed.bookID is null
+) as ListOfAvailableBooks
+where ListOfAvailableBooks.ISBN = 3030;
+
+select isbn from books where id=2

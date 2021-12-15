@@ -30,11 +30,10 @@
                 <td>@book.BookName</td>
                 <td>@book.Author</td>
                 <td>@book.BarCode</td>
-                <td><form asp-action="BookInfo">
+                <td><form asp-action="BookInfo"method="get">
                     <input name ="ISBN" type="submit" alt="Book info" value=@book.ISBN>
                     </form></td>
             </tr>
-                //queery to count number of current available copies
          }
     </table>
 </div>

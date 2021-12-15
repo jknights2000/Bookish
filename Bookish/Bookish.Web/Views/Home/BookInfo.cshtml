@@ -1,40 +1,77 @@
 ﻿@model NoCopiesInfo
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 <style>
     table {
         border-collapse: collapse;
         width: 100%;
     }
+
     td, th {
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
     }
+
     tr:nth-child(even) {
         background-color: #dddddd;
     }
 </style>
 <div class="text-center">
     <h1 class="display-4">@Model.Name</h1>
-    <h2>Number of Copies: @Model.copies</h2>
-    <h2>Number of Avaiable:@Model.avaiable</h2>
-    <h3>Current Borrowed copies:@Model.borrowed</h3>
+    <h2>Number of Copies: @Model.Copies</h2>
+    <h2>Number of Avaiable:@Model.Avaiable</h2>
+    <table>
+        @if (Model.AvailableBooks.Count != 0)
+        {
+            <tr>
+                <th>Book ID</th>
+                <th>ISBN</th>
+                <th>Buttons below allowing user to click to add the book to their borrowed books</th>
+            </tr>
+        }
+        @foreach (var book in Model.AvailableBooks)
+        {
+    <tr>
+        <td>@book.ID</td>
+        <td>@book.ISBN</td>
+        @if (SignInManager.IsSignedIn(User))
+        {
+                @using (Html.BeginForm("BorrowedBook", "Home", FormMethod.Post)){
+            <td>
+                <input type="hidden" name="bookID" value="@book.ID" />
+                <div class="submission">
+                    <input type="submit" value="Submit" />
+                </div>
+            </td>
+                }
+
+            }
+            else
+            {
+            <td>Must Sign in to borrow book</td>
+            }
+        </tr>
+        }
+    </table>
+    <h3>Current Borrowed copies:@Model.Borrowed</h3>
     <table>
         @if (Model.UserBorrowed.Count != 0)
         {
-        <tr>
-            <th>User Name</th>
-            <th>Book Copy ID</th>
-            <th>Date due Back</th>
-        </tr>
+            <tr>
+                <th>User Name</th>
+                <th>Book Copy ID</th>
+                <th>Date due Back</th>
+            </tr>
         }
-        @foreach (var user in Model.UserBorrowed)
+        @foreach (var borrowed in Model.UserBorrowed)
         {
             <tr>
-                <td>@user.UserName</td>
-                <td>@user.ID</td>
-                <td>@user.Duedate.ToShortDateString()</td>
+                <td>@borrowed.UserName</td>
+                <td>@borrowed.ID</td>
+                <td>@borrowed.Duedate.ToShortDateString()</td>
             </tr>
-                //queery to count number of current available copies
-         }
-</table>
+        }
+    </table>
 </div>
