@@ -30,7 +30,7 @@
         @foreach (var user in Model.UserBorrowed)
         {
             <tr>
-                <td>@user.AccountName</td>
+                <td>@user.UserName</td>
                 <td>@user.ID</td>
                 <td>@user.Duedate.ToShortDateString()</td>
             </tr>

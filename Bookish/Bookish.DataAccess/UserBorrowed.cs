@@ -6,7 +6,7 @@ namespace Bookish.DataAccess
 {
     public class UserBorrowed
     {
-        public string AccountName { get; set; }
+        public string UserName { get; set; }
         public int ID { get; set; }
         public DateTime Duedate { get; set; }
     }
