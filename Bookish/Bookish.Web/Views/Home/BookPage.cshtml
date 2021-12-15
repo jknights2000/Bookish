@@ -30,7 +30,7 @@
                 <td>@book.BookName</td>
                 <td>@book.Author</td>
                 <td>@book.BarCode</td>
-                <td><form action="https://localhost:44394/home/bookinfo">
+                <td><form asp-action="BookInfo">
                     <input name ="ISBN" type="submit" alt="Book info" value=@book.ISBN>
                     </form></td>
             </tr>
