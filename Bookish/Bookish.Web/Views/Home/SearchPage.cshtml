@@ -1,0 +1,49 @@
+﻿@model Bookish.Web.Models.Search
+@{
+    ViewBag.Title = "Search";
+}
+<head>
+    <link rel="stylesheet" href="~/css/table.css">
+    <link rel="stylesheet" href="~/css/form.css">
+</head>
+<div class="text-center">
+    <h1 class="display-4">Search</h1>
+    @using (Html.BeginForm("SearchPage", "Home", FormMethod.Post))
+    {
+        @Html.DropDownListFor(m => m.searchby, new SelectList(Enum.GetValues(typeof(SearchBy))))
+        @Html.TextBoxFor(m => m.searchstring, "", new { placeholder = "Search", @required = "true" })
+        <div class="submission">
+            <input id="formsubmit" class="btn btn-primary btn-lg btn-block" type="submit" value="Submit" />
+        </div>
+    }
+        @if (Model.Results.Count != 0)
+        {
+            <table>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>BarCode</th>
+                    <th>BookInfo</th>
+                </tr>
+                @foreach (var book in Model.Results)
+                {
+                    <tr>
+                        <td>@book.ISBN</td>
+                        <td>@book.BookName</td>
+                        <td>@book.Author</td>
+                        <td>@book.BarCode</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" value="go away" onclick="location.href='@Url.Action("BookInfo","Home",new {ISBN = book.ISBN})'" />
+                        </td>
+                    </tr>
+                    //queery to count number of current available copies
+                }
+            </table>
+        }
+        
+        else
+        {
+                <h3>No Results</h3>
+        }
+    </div>
