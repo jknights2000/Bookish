@@ -26,12 +26,46 @@ namespace Bookish.Web.Controllers
         {
             _logger = logger;
         }
+        
         public IActionResult BookPage()
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
             List<BookInfo> books = (List<BookInfo>)db.Query<BookInfo>("select * from BookInfo ORDER BY bookname");
             return View(books);
         }
+        [HttpGet]
+        public IActionResult SearchPage()
+        {
+            
+            Search usersearch = new Search();
+            return View(usersearch);
+        }
+        [HttpPost]
+        public IActionResult SearchPage(Search usersearch)
+        {
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            List<BookInfo> books = new List<BookInfo>();
+            SearchBy searchby = usersearch.searchby;
+            string searchstring = usersearch.searchstring;
+            switch (searchby)
+            {
+                case SearchBy.Author:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where Author = '{searchstring}' ORDER BY bookname");
+                    break;
+                case SearchBy.BookName:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where BookName = '{searchstring}' ORDER BY bookname");
+                    break;
+                case SearchBy.ISBN:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where ISBN = '{searchstring}' ORDER BY bookname");
+                    break;
+                case SearchBy.Barcode:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where Barcode = '{searchstring}' ORDER BY bookname");
+                    break;
+            }
+            usersearch.Results = books;
+            return View(usersearch);
+        }
+        
         public IActionResult BookInfo(int ISBN)
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
@@ -68,8 +102,7 @@ namespace Bookish.Web.Controllers
                 string MaxIdQuery = $"INSERT INTO Books VALUES ({MaxId + i} , {ISBN})";
                 db.Execute(MaxIdQuery);
             }
-        /*    Response.Redirect("~/")*/
-            return View();
+            return RedirectToAction("BookPage", "Home");
         }
 
         public IActionResult UserPage()

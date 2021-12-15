@@ -1,18 +1,7 @@
 ﻿@model List<Bookish.DataAccess.BookInfo>
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
+    <head>
+        <link rel="stylesheet" href="~/css/table.css">
+    </head>
 <div class="text-center">
     <h1 class="display-4">Book List</h1>
     <table>
@@ -30,9 +19,8 @@
                 <td>@book.BookName</td>
                 <td>@book.Author</td>
                 <td>@book.BarCode</td>
-                <td><form asp-action="BookInfo">
-                    <input name ="ISBN" type="submit" alt="Book info" value=@book.ISBN>
-                    </form></td>
+                <td>
+                <button type="button" class="btn btn-primary" text="go away" onclick="location.href='@Url.Action("BookInfo","Home",new {ISBN = book.ISBN})'">Book Info</button>
             </tr>
                 //queery to count number of current available copies
          }

@@ -5,23 +5,10 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-<div class="text-center">
+    <head>
+        <link rel="stylesheet" href="~/css/table.css">
+    </head>
+<div id="main" class="text-center">
     @if (SignInManager.IsSignedIn(User))
     {
         <h1 class="display-4">Welcome @User.Identity.Name</h1>
@@ -37,7 +24,7 @@
                 <tr>
                     <td>@userbook.ID</td>
                     <td>@userbook.BookName</td>
-                    <td>@userbook.Duedate</td>
+                    <td>@userbook.Duedate.ToShortDateString()</td>
                 </tr>
             }
         </table>
