@@ -26,50 +26,97 @@ namespace Bookish.Web.Controllers
         {
             _logger = logger;
         }
+        
         public IActionResult BookPage()
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
             List<BookInfo> books = (List<BookInfo>)db.Query<BookInfo>("select * from BookInfo ORDER BY bookname");
             return View(books);
         }
+        [HttpGet]
+        public IActionResult SearchPage()
+        {
+            
+            Search usersearch = new Search();
+            return View(usersearch);
+        }
+        [HttpPost]
+        public IActionResult SearchPage(Search usersearch)
+        {
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            List<BookInfo> books = new List<BookInfo>();
+            SearchBy searchby = usersearch.searchby;
+            string searchstring = usersearch.searchstring;
+            switch (searchby)
+            {
+                case SearchBy.Author:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where Author = '{searchstring}' ORDER BY bookname");
+                    break;
+                case SearchBy.BookName:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where BookName = '{searchstring}' ORDER BY bookname");
+                    break;
+                case SearchBy.ISBN:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where ISBN = '{searchstring}' ORDER BY bookname");
+                    break;
+                case SearchBy.Barcode:
+                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where Barcode = '{searchstring}' ORDER BY bookname");
+                    break;
+            }
+            usersearch.Results = books;
+            return View(usersearch);
+        }
+        
         public IActionResult BookInfo(int ISBN)
+        {
+            return View(getNoCopiesInfo(ISBN));
+        }
+        [HttpPost]
+        public IActionResult BorrowedBook(int bookID)
+        {
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            BookRepository bookRepo = new BookRepository(db);
+
+            int ISBN = bookRepo.GetISBNUsingBookID(bookID);
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            DateTime dueDateTime = DateTime.Now.AddDays(30);
+            bookRepo.InsertNewBookIntoBorrowed(userId, bookID, dueDateTime);
+            return RedirectToAction("BookInfo",new { ISBN });
+        }
+        public NoCopiesInfo getNoCopiesInfo(int ISBN)
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
             BookRepository bookRepo = new BookRepository(db);
 
             NoCopiesInfo noCopiesInfo = new NoCopiesInfo();
             noCopiesInfo.UserBorrowed = bookRepo.GetListOfBorrowedCopies(ISBN);
+            noCopiesInfo.AvailableBooks = bookRepo.GetListOfAvailableBooks(ISBN);
             noCopiesInfo.Name = bookRepo.GetBookName(ISBN);
-            noCopiesInfo.copies = bookRepo.GetTotalNumberOfCopies(ISBN);
-            noCopiesInfo.avaiable = bookRepo.GetNumberOfAvailableCopies(ISBN);
-            noCopiesInfo.borrowed = bookRepo.GetNumberOfBorrowedCopies(ISBN);
-            return View(noCopiesInfo);
+            noCopiesInfo.Copies = bookRepo.GetTotalNumberOfCopies(ISBN);
+            noCopiesInfo.Avaiable = bookRepo.GetNumberOfAvailableCopies(ISBN);
+            noCopiesInfo.Borrowed = bookRepo.GetNumberOfBorrowedCopies(ISBN);
+            return noCopiesInfo;
         }
+
         [HttpGet]
-        public IActionResult AddBookForm()
+        public IActionResult AddBookForm(AddBorrowedBookModel borrowedBook)
         {
             return View();
         }
         [HttpPost]
         public IActionResult AddBookForm(AddBookModel addBook)
         {
-            string BookName = addBook.BookName;
-            string Author = addBook.Author;
-            int ISBN = addBook.ISBN;
-            int BarCode = addBook.BarCode;
-            int NumberOfCopies = addBook.NumberOfCopies;
 
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
-            db.Execute($"INSERT INTO BookInfo (ISBN, BookName, Author, BarCode) VALUES ('{ISBN}', '{BookName}', '{Author}', '{BarCode}')");
-            int MaxId = db.Query<int>("SELECT MAX(ID) FROM Books").Single();
+            BookRepository bookRepo = new BookRepository(db);
 
-            for (int i = 1; i <= NumberOfCopies; i++)
+            bookRepo.InsertNewBookIntoBookInfo(addBook.ISBN, addBook.BookName, addBook.Author, addBook.BarCode);
+            int MaxId = bookRepo.GetMaxIDFromBooks();
+
+            for (int i = 1; i <= addBook.NumberOfCopies; i++)
             {
-                string MaxIdQuery = $"INSERT INTO Books VALUES ({MaxId + i} , {ISBN})";
-                db.Execute(MaxIdQuery);
+                bookRepo.InsertNewBookIntoBooks(MaxId + i, addBook.ISBN);
             }
-        /*    Response.Redirect("~/")*/
-            return View();
+            return RedirectToAction("BookPage", "Home");
         }
 
         public IActionResult UserPage()
@@ -117,7 +164,7 @@ namespace Bookish.Web.Controllers
 
             return View(editBookInfo);
         }
-        [HttpPut]
+        /*[HttpPut]
         public IActionResult EditBook(BookInfo editBook)
         {
             string BookName = editBook.BookName;
@@ -125,10 +172,10 @@ namespace Bookish.Web.Controllers
             int ISBN = editBook.ISBN;
             int BarCode = editBook.BarCode;
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
-            db.Execute($"INSERT INTO BookInfo (ISBN, BookName, Author, BarCode) VALUES ('{ISBN}', '{BookName}', '{Author}', '{BarCode}')");
+
 
 
             return View();
-        }
+        }*/
     }
 }
