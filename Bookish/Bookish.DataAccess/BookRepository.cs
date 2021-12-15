@@ -21,7 +21,9 @@ namespace Bookish.DataAccess
         public void ExecuteInsertionQuery(string query, object parameters = null) => DatabaseConnection.Query(query, parameters);
 
 
-        //public List<Book> GetListOfBooks(int ISBN) => ExecuteGetListQuery<Book>("select * from Books WHERE ISBN = @ISBN",new { ISBN= ISBN });
+        public List<BookInfo> GetListOfBookInfos(string column, object parameter) =>
+            ExecuteGetListQuery<BookInfo>($"select * from BookInfo WHERE {column} = @parameter",
+                new { parameter=parameter });
 
         public string GetBookName(int ISBN) => 
             ExecuteGetSingleQuery<string>("select BookName from BookINFO WHERE ISBN = @ISBN", 
