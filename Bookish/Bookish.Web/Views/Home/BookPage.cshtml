@@ -20,7 +20,7 @@
         <td>@book.Author</td>
         <td>@book.BarCode</td>
         <td>
-                <button type="button" class="btn btn-primary" text="go away" onclick="location.href='@Url.Action("BookInfo","Home",new {ISBN = book.ISBN})'">Book Info</button>
+            <button type="button" class="btn btn-primary" text="go away" onclick="location.href='@Url.Action("BookInfo","Home",new {ISBN = book.ISBN})'">Book Info</button>
         </td>
         <td>    
           <button name="EditBook" type="button" alt="Edit Book" onclick="location.href='@Url.Action("EditBook","Home",new {ISBN = book.ISBN})'">Edit Book</button>
