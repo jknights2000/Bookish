@@ -34,7 +34,7 @@
                         <td>@book.Author</td>
                         <td>@book.BarCode</td>
                         <td>
-                            <button type="button" class="btn btn-primary" value="go away" onclick="location.href='@Url.Action("BookInfo","Home",new {ISBN = book.ISBN})'" />
+                            <button type="button" class="btn btn-primary" value="go away" onclick="location.href='@Url.Action("BookInfo","Home",new {ISBN = book.ISBN})'">Book Info</button>
                         </td>
                     </tr>
                     //queery to count number of current available copies
