@@ -25,15 +25,22 @@
         </tr>
         @foreach (var book in Model)
         {
-            <tr>
-                <td>@book.ISBN</td>
-                <td>@book.BookName</td>
-                <td>@book.Author</td>
-                <td>@book.BarCode</td>
-                <td><form asp-action="BookInfo">
-                    <input name ="ISBN" type="submit" alt="Book info" value=@book.ISBN>
-                    </form></td>
-            </tr>
+    <tr>
+        <td>@book.ISBN</td>
+        <td>@book.BookName</td>
+        <td>@book.Author</td>
+        <td>@book.BarCode</td>
+        <td>
+            <form asp-action="BookInfo">
+                <input name="ISBN" type="submit" alt="Book info" value=@book.ISBN>
+            </form>
+        </td>
+        <td>
+            
+          <button name="EditBook" type="button" alt="Edit Book" onclick="location.href='@Url.Action("EditBook","Home",new {ISBN = book.ISBN})'">Edit Book</button>
+            
+        </td>
+    </tr>
                 //queery to count number of current available copies
          }
     </table>
