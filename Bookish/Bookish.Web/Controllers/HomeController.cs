@@ -12,6 +12,9 @@ using System.Configuration;
 using Bookish.DataAccess;
 using Dapper;
 using System.Data.SqlClient;
+using System.Security.Principal;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bookish.Web.Controllers
 {
@@ -76,7 +79,18 @@ namespace Bookish.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                var userid = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+                IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+                BookRepository bookRepo = new BookRepository(db);
+                List<PersonalBook> output = bookRepo.GetListOfBooksCurrentUser(userid);
+                return View(output);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()

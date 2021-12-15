@@ -1,8 +1,50 @@
-﻿@{
+﻿@model List<Bookish.DataAccess.PersonalBook>
+@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h1 class="display-4">Welcome @User.Identity.Name</h1>
+        <h2 class="display-4">Books you have borrowed</h2>
+        <table>
+            <tr>
+                <th>Book ID</th>
+                <th>Book name</th>
+                <th>Date due Back</th>
+            </tr>
+            @foreach (var userbook in Model)
+            {
+                <tr>
+                    <td>@userbook.ID</td>
+                    <td>@userbook.BookName</td>
+                    <td>@userbook.Duedate</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h1 class="display-4">Not signed in ..</h1>
+        <h2 class="display-4">what a loser.</h2>
+    }
 </div>
