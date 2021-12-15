@@ -29,6 +29,12 @@ namespace Bookish.DataAccess
 
         public int GetNumberOfAvailableCopies(int ISBN) => ExecuteGetSingleQuery<int>($"select(select count(*) from books where isbn = {ISBN}) - (select count(*) from books, borrowed where books.id = borrowed.bookid and books.ISBN = {ISBN})");
 
+<<<<<<< Updated upstream
         public List<UserBorrowed> GetListOfBorrowedCopies(int ISBN) => ExecuteGetListQuery<UserBorrowed>("Select Accounts.accountname, books.id,borrowed.duedate from books, borrowed, accounts where books.id = borrowed.bookid and borrowed.userid = Accounts.id and books.ISBN = " + ISBN);
+=======
+        public List<UserBorrowed> GetListOfBorrowedCopies(int ISBN) => ExecuteGetListQuery<UserBorrowed>("Select AspNetUsers.UserName, books.id,borrowed.duedate from books, borrowed, AspNetUsers where books.id = borrowed.bookid and borrowed.userid = AspNetUsers.id and books.ISBN = " + ISBN);
+
+        public List<PersonalBook> GetListOfBooksCurrentUser(string userid) => ExecuteGetListQuery<PersonalBook>($"Select Books.ID,BookInfo.BookName,Borrowed.duedate from Books,BookInfo,Borrowed,AspNetUsers where AspNetUsers.id = N'{userid}' and AspNetUsers.Id = Borrowed.userID and Borrowed.bookID = Books.ID and Books.ISBN = BookInfo.ISBN");
+>>>>>>> Stashed changes
     }
 }
