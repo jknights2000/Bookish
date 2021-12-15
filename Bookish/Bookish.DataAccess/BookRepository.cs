@@ -25,6 +25,10 @@ namespace Bookish.DataAccess
 
         public string GetBookName(int ISBN) => ExecuteGetSingleQuery<string>("select BookName from BookINFO WHERE ISBN = " + ISBN);
 
+        public string GetAuthorName(int ISBN) => ExecuteGetSingleQuery<string>("select Author from BookINFO WHERE ISBN = " + ISBN);
+
+        public int GetBarCode(int ISBN) => ExecuteGetSingleQuery<int>("select BarCode from BookINFO WHERE ISBN = " + ISBN);
+
         public int GetTotalNumberOfCopies(int ISBN) => ExecuteGetSingleQuery<int>("select count(*) from Books WHERE ISBN = " + ISBN);
 
         public int GetNumberOfBorrowedCopies(int ISBN) => ExecuteGetSingleQuery<int>("SELECT count(books.id) from books, borrowed where books.id = borrowed.bookid and books.ISBN = " + ISBN);
