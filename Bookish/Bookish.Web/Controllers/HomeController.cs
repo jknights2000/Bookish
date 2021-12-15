@@ -44,22 +44,23 @@ namespace Bookish.Web.Controllers
         public IActionResult SearchPage(Search usersearch)
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            BookRepository bookRepo = new BookRepository(db);
             List<BookInfo> books = new List<BookInfo>();
             SearchBy searchby = usersearch.searchby;
             string searchstring = usersearch.searchstring;
             switch (searchby)
             {
                 case SearchBy.Author:
-                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where Author = '{searchstring}' ORDER BY bookname");
+                    books = bookRepo.GetListOfBookInfos("Author", searchstring);
                     break;
                 case SearchBy.BookName:
-                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where BookName = '{searchstring}' ORDER BY bookname");
+                    books = bookRepo.GetListOfBookInfos("BookName", searchstring);
                     break;
                 case SearchBy.ISBN:
-                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where ISBN = '{searchstring}' ORDER BY bookname");
+                    books = bookRepo.GetListOfBookInfos("ISBN", searchstring);
                     break;
                 case SearchBy.Barcode:
-                    books = (List<BookInfo>)db.Query<BookInfo>($"select * from BookInfo where Barcode = '{searchstring}' ORDER BY bookname");
+                    books = bookRepo.GetListOfBookInfos("Barcode", searchstring);
                     break;
             }
             usersearch.Results = books;
