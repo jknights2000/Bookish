@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Bookish.DataAccess
 {
-    public class UserBorrowed
+    public class PersonalBook
     {
-        public string UserName { get; set; }
         public int ID { get; set; }
+        public string BookName { get; set; }
+
         public DateTime Duedate { get; set; }
     }
 }
