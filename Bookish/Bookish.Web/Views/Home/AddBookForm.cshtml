@@ -10,10 +10,6 @@
     @using (Html.BeginForm("AddBookForm", "Home", FormMethod.Post))
     {
     <div class="text-center">
-            <h1 class="display-4">Welcome</h1>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-            <h3>Add A New Book</h3>
-
             <div class="bookname">
                 <label for="Title">Title</label>
                 @Html.TextBoxFor(m => m.BookName, "", new { placeholder = "Title of Book", @required = "true" })
