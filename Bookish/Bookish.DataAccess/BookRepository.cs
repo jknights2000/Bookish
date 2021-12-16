@@ -37,7 +37,6 @@ namespace Bookish.DataAccess
 
         public int GetBarCode(int ISBN) => ExecuteGetSingleQuery<int>("select BarCode from BookINFO WHERE ISBN = " + ISBN);
 
-        public int GetTotalNumberOfCopies(int ISBN) => ExecuteGetSingleQuery<int>("select count(*) from Books WHERE ISBN = " + ISBN);
 
         public int GetNumberOfBorrowedCopies(int ISBN) => 
             ExecuteGetSingleQuery<int>("SELECT count(books.id) from books, borrowed where books.id = borrowed.bookid and books.ISBN = @ISBN",
@@ -85,8 +84,6 @@ namespace Bookish.DataAccess
         public void RemoveBookFromBorrowedUsingBookId(int BookId) =>
             ExecuteInsertionQuery("delete from Borrowed where bookID = @BookId",
             new { BookId = BookId });
-
-        public void InsertNewBookIntoBorrowed( string UserId, int BookId, DateTime DueDate) => ExecuteInsertionQuery($"insert into borrowed values ('{UserId}',{BookId},'{DueDate.ToString("yyyy-MM-dd")}')");
 
         public void EditBookIntoBookInfo(int currentISBN, int newISBN, string BookName, string Author, int BarCode) => ExecuteInsertionQuery($"UPDATE BOOKINFO SET ISBN='{newISBN}', BookName='{BookName}', Author='{Author}', BarCode='{BarCode}' WHERE ISBN={currentISBN}");
 
