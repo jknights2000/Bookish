@@ -22,23 +22,27 @@ namespace Bookish.DataAccess
 
         public List<BookInfo> GetListOfBookInfos(string column, object parameter) =>
             ExecuteGetListQuery<BookInfo>($"select * from BookInfo WHERE {column} = @parameter",
-                new { parameter=parameter });
+                new { parameter = parameter });
 
-        public string GetBookName(int ISBN) => 
-            ExecuteGetSingleQuery<string>("select BookName from BookINFO WHERE ISBN = @ISBN", 
+        public string GetBookName(int ISBN) =>
+            ExecuteGetSingleQuery<string>("select BookName from BookINFO WHERE ISBN = @ISBN",
                 new { ISBN = ISBN });
 
-        public int GetTotalNumberOfCopies(int ISBN) => 
-            ExecuteGetSingleQuery<int>("select count(*) from Books WHERE ISBN = @ISBN", 
+        public int GetTotalNumberOfCopies(int ISBN) =>
+            ExecuteGetSingleQuery<int>("select count(*) from Books WHERE ISBN = @ISBN",
                 new { ISBN = ISBN });
 
 
-        public string GetAuthorName(int ISBN) => ExecuteGetSingleQuery<string>("select Author from BookINFO WHERE ISBN = " + ISBN);
+        public string GetAuthorName(int ISBN) => 
+            ExecuteGetSingleQuery<string>("select Author from BookINFO WHERE ISBN = @ISBN",
+            new { ISBN=ISBN });
 
-        public int GetBarCode(int ISBN) => ExecuteGetSingleQuery<int>("select BarCode from BookINFO WHERE ISBN = " + ISBN);
+        public int GetBarCode(int ISBN) => 
+            ExecuteGetSingleQuery<int>("select BarCode from BookINFO WHERE ISBN = @ISBN",
+            new { ISBN = ISBN });
 
 
-        public int GetNumberOfBorrowedCopies(int ISBN) => 
+        public int GetNumberOfBorrowedCopies(int ISBN) =>
             ExecuteGetSingleQuery<int>("SELECT count(books.id) from books, borrowed where books.id = borrowed.bookid and books.ISBN = @ISBN",
             new { ISBN = ISBN });
 
@@ -61,7 +65,7 @@ namespace Bookish.DataAccess
 
         public List<PersonalBook> GetListOfBooksCurrentUser(string userid) =>
             ExecuteGetListQuery<PersonalBook>("Select Books.ID,BookInfo.BookName,Borrowed.duedate from Books,BookInfo,Borrowed,AspNetUsers where AspNetUsers.id = @userid and AspNetUsers.Id = Borrowed.userID and Borrowed.bookID = Books.ID and Books.ISBN = BookInfo.ISBN",
-                new { userId=userid});
+                new { userId = userid });
         //Had to remove "N" before userid to get this to work ^^^
 
         public List<Book> GetListOfAvailableBooks(int ISBN) =>
@@ -85,7 +89,9 @@ namespace Bookish.DataAccess
             ExecuteInsertionQuery("delete from Borrowed where bookID = @BookId",
             new { BookId = BookId });
 
-        public void EditBookIntoBookInfo(int currentISBN, int newISBN, string BookName, string Author, int BarCode) => ExecuteInsertionQuery($"UPDATE BOOKINFO SET ISBN='{newISBN}', BookName='{BookName}', Author='{Author}', BarCode='{BarCode}' WHERE ISBN={currentISBN}");
+        public void EditBookIntoBookInfo(int currentISBN, int newISBN, string BookName, string Author, int BarCode) =>
+            ExecuteInsertionQuery($"UPDATE BOOKINFO SET ISBN=@newISBN, BookName=@BookName, Author=@Author, BarCode=@BarCode WHERE ISBN=@currentISBN",
+                new { newISBN = newISBN, BookName = BookName, Author = Author, BarCode = BarCode, currentISBN = currentISBN });
 
     }
 }
