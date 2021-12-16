@@ -129,7 +129,7 @@ namespace Bookish.Web.Controllers
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
             BookRepository bookRepo = new BookRepository(db);
 
-            bookRepo.InsertNewBookIntoBookInfo(addBook.ISBN, addBook.BookName, addBook.Author, addBook.BarCode);
+            bookRepo.InsertNewBookIntoBookInfo(addBook.ISBN, addBook.BookName, addBook.Author, addBook.BarCode,addBook.Picture);
             int MaxId = bookRepo.GetMaxIDFromBooks();
 
             for (int i = 1; i <= addBook.NumberOfCopies; i++)
@@ -180,6 +180,7 @@ namespace Bookish.Web.Controllers
             editBookInfo.BookName = bookRepo.GetBookName(ISBN);
             editBookInfo.Author = bookRepo.GetAuthorName(ISBN);
             editBookInfo.BarCode = bookRepo.GetBarCode(ISBN);
+            editBookInfo.Picture = bookRepo.GetPicture(ISBN);
             editBookInfo.currentISBN = ISBN;
             editBookInfo.newISBN = ISBN;
 
@@ -193,10 +194,10 @@ namespace Bookish.Web.Controllers
             string Author = editBook.Author;
             int newISBN = editBook.newISBN;
             int BarCode = editBook.BarCode;
-
+            string pic = editBook.Picture;
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
             BookRepository bookRepo = new BookRepository(db);
-            bookRepo.EditBookIntoBookInfo(currentISBN, newISBN, BookName, Author, BarCode);
+            bookRepo.EditBookIntoBookInfo(currentISBN, newISBN, BookName, Author, BarCode,pic);
 
             return RedirectToAction("BookPage", "Home");
         }

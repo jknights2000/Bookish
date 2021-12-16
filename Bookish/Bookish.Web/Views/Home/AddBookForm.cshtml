@@ -19,6 +19,10 @@
         <label for="Author">Author</label>
         @Html.TextBoxFor(m => m.Author, "", new { placeholder = "Author", @required = "true" })
     </div>
+    <div class="url">
+        <label for="Picture">Picutre Url</label>
+        @Html.TextBoxFor(m => m.Picture, "", new { placeholder = "Picutre Url", @required = "true" })
+    </div>
     <div class="numbers">
         <label for="NumberOfCopies">Number of Copies</label>
         @Html.TextBoxFor(m => m.NumberOfCopies, "", new { placeholder = "Number of Copies", @type = "number", @required = "true", @min = 1 })

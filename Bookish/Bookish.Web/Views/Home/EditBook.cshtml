@@ -25,28 +25,32 @@
   
         @using (Html.BeginForm("EditBook", "Home", FormMethod.Post))
             {
-                <div class="text-center">
-                    <h3>Edit Book</h3>
-                    @Html.HiddenFor(m => m.currentISBN)
-                <div class="bookname">
-                    <label for="Title">Title</label>
-                    @Html.TextBoxFor(m => m.BookName, "", new { placeholder = "Title of Book", @required = "true" })
-                </div>
-                <div class="author">
-                    <label for="Author">Author</label>
-                    @Html.TextBoxFor(m => m.Author, "", new { placeholder = "Author", @required = "true" })
-                </div>
-                <div class="numbers">
-                    <label for="ISBN">ISBN</label>
-                    @Html.TextBoxFor(m => m.newISBN, "", new { placeholder = "ISBN", @type = "number", @required = "true", @min = 0 })
-                    <label for="BarCode">Barcode</label>
-                    @Html.TextBoxFor(m => m.BarCode, "", new { placeholder = "Barcode", @type = "number", @required = "true", @min = 0 })
-                </div>
-                    <div class="submission">
-                        <input type="submit" id="formsubmit" class="btn btn-primary btn-lg btn-block" value="Submit" />
-                    </div>
+<div class="text-center">
+    <h3>Edit Book</h3>
+    @Html.HiddenFor(m => m.currentISBN)
+    <div class="bookname">
+        <label for="Title">Title</label>
+        @Html.TextBoxFor(m => m.BookName, "", new { placeholder = "Title of Book", @required = "true" })
+    </div>
+    <div class="author">
+        <label for="Author">Author</label>
+        @Html.TextBoxFor(m => m.Author, "", new { placeholder = "Author", @required = "true" })
+    </div>
+    <div class="url">
+        <label for="Picture">Picutre Url</label>
+        @Html.TextBoxFor(m => m.Picture, "", new { placeholder = "Picutre Url", @required = "true" })
+    </div>
+    <div class="numbers">
+        <label for="ISBN">ISBN</label>
+        @Html.TextBoxFor(m => m.newISBN, "", new { placeholder = "ISBN", @type = "number", @required = "true", @min = 0 })
+        <label for="BarCode">Barcode</label>
+        @Html.TextBoxFor(m => m.BarCode, "", new { placeholder = "Barcode", @type = "number", @required = "true", @min = 0 })
+    </div>
+    <div class="submission">
+        <input type="submit" id="formsubmit" class="btn btn-primary btn-lg btn-block" value="Submit" />
+    </div>
 
 
-                </div>
+</div>
             }
     </div>

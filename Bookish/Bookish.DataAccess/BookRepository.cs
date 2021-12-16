@@ -40,6 +40,9 @@ namespace Bookish.DataAccess
         public int GetBarCode(int ISBN) => 
             ExecuteGetSingleQuery<int>("select BarCode from BookINFO WHERE ISBN = @ISBN",
             new { ISBN = ISBN });
+        public string GetPicture(int ISBN) =>
+           ExecuteGetSingleQuery<string>("select Picture from BookINFO WHERE ISBN = @ISBN",
+           new { ISBN = ISBN });
 
 
         public int GetNumberOfBorrowedCopies(int ISBN) =>
@@ -73,12 +76,12 @@ namespace Bookish.DataAccess
                 new { ISBN = ISBN }).ToList();
 
 
-        public void InsertNewBookIntoBookInfo(int ISBN, string BookName, string Author, int BarCode) =>
-            ExecuteInsertionQuery("INSERT INTO BookInfo (ISBN, BookName, Author, BarCode) VALUES (@ISBN, @BookName, @Author, @BarCode)",
-                new { ISBN = ISBN, BookName = BookName, Author = Author, BarCode = BarCode });
+        public void InsertNewBookIntoBookInfo(int ISBN, string BookName, string Author, int BarCode,string Picture) =>
+            ExecuteInsertionQuery("INSERT INTO BookInfo (ISBN, BookName, Author, BarCode,Picture) VALUES (@ISBN, @BookName, @Author, @BarCode,@Picture)",
+                new { ISBN = ISBN, BookName = BookName, Author = Author, BarCode = BarCode ,Picture = Picture});
 
         public void InsertNewBookIntoBooks(int Id, int ISBN) =>
-            ExecuteInsertionQuery("INSERT INTO Books VALUES (@ID , @ISBN)",
+            ExecuteInsertionQuery("INSERT INTO Books VALUES (@ID , @ISBN,0)",
             new { ID = Id, ISBN = ISBN });
 
         public void InsertNewBookIntoBorrowed(string UserId, int BookId, DateTime DueDate) =>
@@ -89,9 +92,9 @@ namespace Bookish.DataAccess
             ExecuteInsertionQuery("delete from Borrowed where bookID = @BookId",
             new { BookId = BookId });
 
-        public void EditBookIntoBookInfo(int currentISBN, int newISBN, string BookName, string Author, int BarCode) =>
-            ExecuteInsertionQuery($"UPDATE BOOKINFO SET ISBN=@newISBN, BookName=@BookName, Author=@Author, BarCode=@BarCode WHERE ISBN=@currentISBN",
-                new { newISBN = newISBN, BookName = BookName, Author = Author, BarCode = BarCode, currentISBN = currentISBN });
+        public void EditBookIntoBookInfo(int currentISBN, int newISBN, string BookName, string Author, int BarCode,string Picture) =>
+            ExecuteInsertionQuery($"UPDATE BOOKINFO SET ISBN=@newISBN, BookName=@BookName, Author=@Author, BarCode=@BarCode,Picture=@Picture WHERE ISBN=@currentISBN",
+                new { newISBN = newISBN, BookName = BookName, Author = Author, BarCode = BarCode, currentISBN = currentISBN,Picture = Picture });
         public int GetCurrentBorrwedCount(int Bookid) =>
             ExecuteGetSingleQuery<int>("Select Borrowedcount from books where ID = @BookId",
             new { BookId = Bookid });
