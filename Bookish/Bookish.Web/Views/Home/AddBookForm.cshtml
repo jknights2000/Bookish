@@ -9,37 +9,34 @@
 
     @using (Html.BeginForm("AddBookForm", "Home", FormMethod.Post))
     {
-    <div class="text-center">
-            <h1 class="display-4">Welcome</h1>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-            <h3>Add A New Book</h3>
-
-            <div class="bookname">
-                <label for="Title">Title</label>
-                @Html.TextBoxFor(m => m.BookName, "", new { placeholder = "Title of Book", @required = "true" })
-            </div>
-            <div class="author">
-                <label for="Author">Author</label>
-                @Html.TextBoxFor(m => m.Author,"",new {placeholder="Author", @required = "true" })
-            </div>
-            <div class="numbers">
-                <label for="NumberOfCopies">Number of Copies</label>
-                @Html.TextBoxFor(m => m.NumberOfCopies,"", new { placeholder = "Number of Copies", @type = "number", @required = "true", @min = 1 })
-            </div>
-            <div class="numbers">
-                <label for="ISBN">ISBN</label>
-                @Html.TextBoxFor(m => m.ISBN,"", new { placeholder = "ISBN", @type = "number", @required = "true", @min = 0 })
-            </div>
-            <div class="numbers">
-                <label for="BarCode">Barcode</label>
-                @Html.TextBoxFor(m => m.BarCode, "", new { placeholder = "Barcode", @type = "number", @required = "true", @min = 0 })
-            </div>
-                    <div class="submission">
-                        <input id="formsubmit" class ="btn btn-primary btn-lg btn-block" type="submit" value="Submit" />
-                    </div>
+<div class="text-center">
+    <h1 class="display-4">Add Book</h1>
+    <div class="bookname">
+        <label for="Title">Title</label>
+        @Html.TextBoxFor(m => m.BookName, "", new { placeholder = "Title of Book", @required = "true" })
+    </div>
+    <div class="author">
+        <label for="Author">Author</label>
+        @Html.TextBoxFor(m => m.Author, "", new { placeholder = "Author", @required = "true" })
+    </div>
+    <div class="numbers">
+        <label for="NumberOfCopies">Number of Copies</label>
+        @Html.TextBoxFor(m => m.NumberOfCopies, "", new { placeholder = "Number of Copies", @type = "number", @required = "true", @min = 1 })
+    </div>
+    <div class="numbers">
+        <label for="ISBN">ISBN</label>
+        @Html.TextBoxFor(m => m.ISBN, "", new { placeholder = "ISBN", @type = "number", @required = "true", @min = 0 })
+    </div>
+    <div class="numbers">
+        <label for="BarCode">Barcode</label>
+        @Html.TextBoxFor(m => m.BarCode, "", new { placeholder = "Barcode", @type = "number", @required = "true", @min = 0 })
+    </div>
+    <div class="submission">
+        <input id="formsubmit" class="btn btn-primary btn-lg btn-block" type="submit" value="Submit" />
+    </div>
 
 
-       </div>
+</div>
                 }
         
     
