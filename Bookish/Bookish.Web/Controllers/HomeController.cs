@@ -160,22 +160,25 @@ namespace Bookish.Web.Controllers
             editBookInfo.BookName = bookRepo.GetBookName(ISBN);
             editBookInfo.Author = bookRepo.GetAuthorName(ISBN);
             editBookInfo.BarCode = bookRepo.GetBarCode(ISBN);
-            editBookInfo.ISBN = ISBN;
+            editBookInfo.currentISBN = ISBN;
+            editBookInfo.newISBN = ISBN;
 
             return View(editBookInfo);
         }
-        /*[HttpPut]
-        public IActionResult EditBook(BookInfo editBook)
+        [HttpPost]
+        public IActionResult EditBook(EditBookModel editBook)
         {
+            int currentISBN = editBook.currentISBN;
             string BookName = editBook.BookName;
             string Author = editBook.Author;
-            int ISBN = editBook.ISBN;
+            int newISBN = editBook.newISBN;
             int BarCode = editBook.BarCode;
+
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            BookRepository bookRepo = new BookRepository(db);
+            bookRepo.EditBookIntoBookInfo(currentISBN, newISBN, BookName, Author, BarCode);
 
-
-
-            return View();
-        }*/
+            return RedirectToAction("BookPage", "Home");
+        }
     }
 }

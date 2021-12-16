@@ -17,35 +17,35 @@
         <tr>
             <td>@Model.BookName</td>
             <td>@Model.Author</td>
-            <td>@Model.ISBN</td>
+            <td>@Model.currentISBN</td>
             <td>@Model.BarCode</td>
         </tr>
     </table>
-    @using (Html.BeginForm("EditBook", "Home", FormMethod.Post))
-    @*should the FormMethod be Put ?*@
-    {
-        <div class="text-center">
-            <h3>Edit Book</h3>
+  
+        @using (Html.BeginForm("EditBook", "Home", FormMethod.Post))
+            {
+                <div class="text-center">
+                    <h3>Edit Book</h3>
+                    @Html.HiddenFor(m => m.currentISBN)
+                    <div class="bookname">
+                        <label for="Title">Title</label>
+                        @Html.TextBoxFor(m => m.BookName)                     
+                    </div>
+                    <div class="author">
+                        <label for="Author">Author</label>
+                        @Html.TextBoxFor(m => m.Author)
+                    </div>
+                    <div class="numbers">
+                        <label for="ISBN">ISBN</label>
+                        @Html.TextBoxFor(m => m.newISBN)
+                        <label for="BarCode">Barcode</label>
+                        @Html.TextBoxFor(m => m.BarCode)
+                    </div>
+                    <div class="submission">
+                        <input type="submit" value="Submit" />
+                    </div>
 
-            <div class="bookname">
-                <label for="Title">Title</label>
-                @Html.TextBoxFor(m => m.BookName)
-            </div>
-            <div class="author">
-                <label for="Author">Author</label>
-                @Html.TextBoxFor(m => m.Author)
-            </div>
-            <div class="numbers">
-                <label for="ISBN">ISBN</label>
-                @Html.TextBoxFor(m => m.ISBN)
-                <label for="BarCode">Barcode</label>
-                @Html.TextBoxFor(m => m.BarCode)
-            </div>
-            <div class="submission">
-                <input type="submit" value="Submit" />
-            </div>
 
-
-        </div>
-    }
-</div>
+                </div>
+            }
+    </div>

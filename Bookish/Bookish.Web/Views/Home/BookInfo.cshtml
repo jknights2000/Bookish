@@ -1,4 +1,7 @@
 ﻿@model NoCopiesInfo
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 <head>
     <link rel="stylesheet" href="~/css/table.css">
 </head>
@@ -17,26 +20,27 @@
         }
         @foreach (var book in Model.AvailableBooks)
         {
-    <tr>
-        <td>@book.ID</td>
-        <td>@book.ISBN</td>
-        @if (SignInManager.IsSignedIn(User))
-        {
-                @using (Html.BeginForm("BorrowedBook", "Home", FormMethod.Post)){
-            <td>
-                <input type="hidden" name="bookID" value="@book.ID" />
-                <div class="submission">
-                    <input type="submit" value="Submit" />
-                </div>
-            </td>
-                }
+            <tr>
+                <td>@book.ID</td>
+                <td>@book.ISBN</td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @using (Html.BeginForm("BorrowedBook", "Home", FormMethod.Post))
+                    {
+                        <td>
+                            <input type="hidden" name="bookID" value="@book.ID" />
+                            <div class="submission">
+                                <input type="submit" value="Submit" />
+                            </div>
+                        </td>
+                    }
 
-            }
-            else
-            {
-            <td>Must Sign in to borrow book</td>
-            }
-        </tr>
+                }
+                else
+                {
+                    <td>Must Sign in to borrow book</td>
+                }
+            </tr>
         }
     </table>
     <h3>Current Borrowed copies:@Model.Borrowed</h3>
