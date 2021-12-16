@@ -21,8 +21,8 @@ namespace Bookish.DataAccess
 
 
         public List<BookInfo> GetListOfBookInfos(string column, object parameter) =>
-            ExecuteGetListQuery<BookInfo>($"select * from BookInfo WHERE {column} = @parameter",
-                new { parameter = parameter });
+            ExecuteGetListQuery<BookInfo>($"select * from BookInfo WHERE {column} like @parameter",
+                new { parameter = "%"+parameter+"%" });
 
         public string GetBookName(int ISBN) =>
             ExecuteGetSingleQuery<string>("select BookName from BookINFO WHERE ISBN = @ISBN",
