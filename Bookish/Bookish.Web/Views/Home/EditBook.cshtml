@@ -4,6 +4,7 @@
 }
 <head>
     <link rel="stylesheet" href="~/css/table.css">
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
 <div class="text-center">
@@ -27,22 +28,22 @@
                 <div class="text-center">
                     <h3>Edit Book</h3>
                     @Html.HiddenFor(m => m.currentISBN)
-                    <div class="bookname">
-                        <label for="Title">Title</label>
-                        @Html.TextBoxFor(m => m.BookName)                     
-                    </div>
-                    <div class="author">
-                        <label for="Author">Author</label>
-                        @Html.TextBoxFor(m => m.Author)
-                    </div>
-                    <div class="numbers">
-                        <label for="ISBN">ISBN</label>
-                        @Html.TextBoxFor(m => m.newISBN)
-                        <label for="BarCode">Barcode</label>
-                        @Html.TextBoxFor(m => m.BarCode)
-                    </div>
+                <div class="bookname">
+                    <label for="Title">Title</label>
+                    @Html.TextBoxFor(m => m.BookName, "", new { placeholder = "Title of Book", @required = "true" })
+                </div>
+                <div class="author">
+                    <label for="Author">Author</label>
+                    @Html.TextBoxFor(m => m.Author, "", new { placeholder = "Author", @required = "true" })
+                </div>
+                <div class="numbers">
+                    <label for="ISBN">ISBN</label>
+                    @Html.TextBoxFor(m => m.newISBN, "", new { placeholder = "ISBN", @type = "number", @required = "true", @min = 0 })
+                    <label for="BarCode">Barcode</label>
+                    @Html.TextBoxFor(m => m.BarCode, "", new { placeholder = "Barcode", @type = "number", @required = "true", @min = 0 })
+                </div>
                     <div class="submission">
-                        <input type="submit" value="Submit" />
+                        <input type="submit" id="formsubmit" class="btn btn-primary btn-lg btn-block" value="Submit" />
                     </div>
 
 
