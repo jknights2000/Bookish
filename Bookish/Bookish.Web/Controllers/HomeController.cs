@@ -161,5 +161,35 @@ namespace Bookish.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult EditBook(int ISBN)
+        {
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            BookRepository bookRepo = new BookRepository(db);
+
+            EditBookModel editBookInfo = new EditBookModel();
+            editBookInfo.BookName = bookRepo.GetBookName(ISBN);
+            editBookInfo.Author = bookRepo.GetAuthorName(ISBN);
+            editBookInfo.BarCode = bookRepo.GetBarCode(ISBN);
+            editBookInfo.currentISBN = ISBN;
+            editBookInfo.newISBN = ISBN;
+
+            return View(editBookInfo);
+        }
+        [HttpPost]
+        public IActionResult EditBook(EditBookModel editBook)
+        {
+            int currentISBN = editBook.currentISBN;
+            string BookName = editBook.BookName;
+            string Author = editBook.Author;
+            int newISBN = editBook.newISBN;
+            int BarCode = editBook.BarCode;
+
+            IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
+            BookRepository bookRepo = new BookRepository(db);
+            bookRepo.EditBookIntoBookInfo(currentISBN, newISBN, BookName, Author, BarCode);
+
+            return RedirectToAction("BookPage", "Home");
+        }
     }
 }
