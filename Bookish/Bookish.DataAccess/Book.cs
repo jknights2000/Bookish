@@ -6,5 +6,7 @@ namespace Bookish.DataAccess
     {
         public int ID { set; get; }
         public int ISBN { set; get; }
+
+        public int Borrowedcount { set; get; }
     }
 }

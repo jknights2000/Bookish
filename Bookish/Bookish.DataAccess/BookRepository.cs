@@ -69,7 +69,7 @@ namespace Bookish.DataAccess
         //Had to remove "N" before userid to get this to work ^^^
 
         public List<Book> GetListOfAvailableBooks(int ISBN) =>
-            ExecuteGetListQuery<Book>("select ID,ISBN from (select * from books left join Borrowed on books.id = Borrowed.bookID where Borrowed.bookID is null) as ListOfAvailableBooks where ListOfAvailableBooks.ISBN = @ISBN",
+            ExecuteGetListQuery<Book>("select ID,ISBN,Borrowedcount from (select * from books left join Borrowed on books.id = Borrowed.bookID where Borrowed.bookID is null) as ListOfAvailableBooks where ListOfAvailableBooks.ISBN = @ISBN",
                 new { ISBN = ISBN }).ToList();
 
 
@@ -92,6 +92,9 @@ namespace Bookish.DataAccess
         public void EditBookIntoBookInfo(int currentISBN, int newISBN, string BookName, string Author, int BarCode) =>
             ExecuteInsertionQuery($"UPDATE BOOKINFO SET ISBN=@newISBN, BookName=@BookName, Author=@Author, BarCode=@BarCode WHERE ISBN=@currentISBN",
                 new { newISBN = newISBN, BookName = BookName, Author = Author, BarCode = BarCode, currentISBN = currentISBN });
-
+        public int GetCurrentBorrwedCount(int Bookid) =>
+            ExecuteGetSingleQuery<int>("Select Borrowedcount from books where ID = @BookId",
+            new { BookId = Bookid });
+        public void UpdateBorrowedcount(int Bookid, int current) => ExecuteInsertionQuery("UPDATE books Set Borrowedcount = @newval WHERE ID = @BookId", new { BookId = Bookid, newval = current + 1 });
     }
 }
