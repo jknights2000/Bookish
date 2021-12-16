@@ -10,5 +10,6 @@ namespace Bookish.DataAccess
         public string BookName { get; set; }
         public string Author { get; set; }
         public int BarCode { get; set; }
+        public string Picture { get; set; }
     }
 }

@@ -31,18 +31,8 @@ namespace Bookish.Web.Controllers
             _logger = logger;
             
         }
-        private Uri RedirectUri
-        {
-            get
-            {
-                var uribuilder = new UriBuilder(Request.Headers["Referer"]);
-                uribuilder.Query = null;
-                uribuilder.Fragment = null;
-                uribuilder.Path = Url.Action("FacebookCallback");
-                return uribuilder.Uri;
-            }
-           
-        }
+
+        
 
         public IActionResult BookPage()
         {
@@ -98,6 +88,8 @@ namespace Bookish.Web.Controllers
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             DateTime dueDateTime = DateTime.Now.AddDays(30);
             bookRepo.InsertNewBookIntoBorrowed(userId, bookID, dueDateTime);
+            int current = bookRepo.GetCurrentBorrwedCount(bookID);
+            bookRepo.UpdateBorrowedcount(bookID, current);
             return RedirectToAction("BookInfo",new { ISBN });
         }
         [HttpPost]
