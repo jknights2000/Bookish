@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+
 
 namespace Bookish.Web
 {
@@ -27,15 +29,35 @@ namespace Bookish.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var config = GetConfiguration();
+            string fappid = config.GetSection("fappid").Value;
+            string fappsecret = config.GetSection("fappsecret").Value;
+            string gappid = config.GetSection("gappid").Value;
+            string gappsecret = config.GetSection("gappsecret").Value;
+
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = fappid;
+                facebookOptions.AppSecret = fappsecret;
+            }).AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = gappid;
+                googleOptions.ClientSecret = gappsecret;
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
-
+        public static IConfiguration GetConfiguration()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            return builder.Build();
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
