@@ -17,7 +17,6 @@ namespace Bookish.DataAccess
 
         public List<T> ExecuteGetListQuery<T>(string query, object parameters = null) => DatabaseConnection.Query<T>(query, parameters).ToList();
         public T ExecuteGetSingleQuery<T>(string query, object parameters = null) => DatabaseConnection.Query<T>(query, parameters).Single();
-
         public void ExecuteInsertionQuery(string query, object parameters = null) => DatabaseConnection.Query(query, parameters);
 
 
@@ -37,9 +36,12 @@ namespace Bookish.DataAccess
             ExecuteGetSingleQuery<int>("SELECT count(books.id) from books, borrowed where books.id = borrowed.bookid and books.ISBN = @ISBN",
             new { ISBN = ISBN });
 
-        public int GetNumberOfAvailableCopies(int ISBN) => ExecuteGetSingleQuery<int>("select(select count(*) from books where isbn = @ISBN) - (select count(*) from books, borrowed where books.id = borrowed.bookid and books.ISBN = @ISBN)", new { ISBN = ISBN });
+        public int GetNumberOfAvailableCopies(int ISBN) =>
+            ExecuteGetSingleQuery<int>("select(select count(*) from books where isbn = @ISBN) - (select count(*) from books, borrowed where books.id = borrowed.bookid and books.ISBN = @ISBN)",
+                new { ISBN = ISBN });
 
-        public int GetMaxIDFromBooks() => ExecuteGetSingleQuery<int>("SELECT MAX(ID) FROM Books");
+        public int GetMaxIDFromBooks() =>
+            ExecuteGetSingleQuery<int>("SELECT MAX(ID) FROM Books");
 
         public int GetISBNUsingBookID(int BookId) =>
             ExecuteGetSingleQuery<int>("select ISBN from books where id=@BookId",
