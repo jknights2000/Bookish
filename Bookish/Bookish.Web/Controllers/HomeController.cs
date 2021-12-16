@@ -15,18 +15,35 @@ using System.Data.SqlClient;
 using System.Security.Principal;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Bookish.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        string appid = string.Empty;
+        string appsecret = string.Empty;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
         }
-        
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uribuilder = new UriBuilder(Request.Headers["Referer"]);
+                uribuilder.Query = null;
+                uribuilder.Fragment = null;
+                uribuilder.Path = Url.Action("FacebookCallback");
+                return uribuilder.Uri;
+            }
+           
+        }
+
         public IActionResult BookPage()
         {
             IDbConnection db = new SqlConnection("Server = localhost; Database = Bookish; Integrated Security = True; MultipleActiveResultSets = true;");
