@@ -15,5 +15,6 @@ namespace Bookish.Web.Models
         public int Copies;
         public int Avaiable;
         public int Borrowed;
+        
     }
 }

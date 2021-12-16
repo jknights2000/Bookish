@@ -14,6 +14,7 @@
             <tr>
                 <th>Book ID</th>
                 <th>ISBN</th>
+                <th>Times borrowed</th>
                 <th>Borrow a Book</th>
             </tr>
         }
@@ -22,6 +23,7 @@
             <tr>
                 <td>@book.ID</td>
                 <td>@book.ISBN</td>
+                <td>@book.Borrowedcount</td>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     @using (Html.BeginForm("BorrowedBook", "Home", FormMethod.Post))

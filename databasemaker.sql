@@ -6,11 +6,13 @@ CREATE TABLE BookInfo(
 ISBN int NOT NULL PRIMARY KEY,
 BookName varchar(255),
 Author varchar(255),
-BarCode int
+BarCode int,
+Picture varchar(255)
 )
 CREATE TABLE Books(
 ID int NOT NULL PRIMARY KEY,
-ISBN int NOT NULL FOREIGN KEY REFERENCES BookInfo(ISBN) ON UPDATE CASCADE
+ISBN int NOT NULL FOREIGN KEY REFERENCES BookInfo(ISBN) ON UPDATE CASCADE,
+Borrowedcount int
 )
 CREATE TABLE Borrowed(
 userID nvarchar(450) NOT NULL FOREIGN KEY REFERENCES AspNetUsers(ID),
